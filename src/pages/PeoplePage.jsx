@@ -14,15 +14,15 @@ function PeoplePage({ navigate }) {
 
       <section style={{ padding:"48px 48px 72px" }}>
         {/* Founder - full-width card */}
-        <div style={{ display:"grid", gridTemplateColumns:"320px 1fr", border:"1px solid rgba(255,255,255,0.07)", marginBottom:"2px" }}>
-          <div style={{ background:"var(--g900)", display:"flex", alignItems:"center", justifyContent:"center", position:"relative", overflow:"hidden", minHeight:"340px", borderRight:"1px solid rgba(255,255,255,0.07)" }}>
+        <div style={{ display:"grid", gridTemplateColumns:"320px 1fr", border:"1px solid var(--g600)", marginBottom:"2px" }}>
+          <div style={{ background:"var(--g900)", display:"flex", alignItems:"center", justifyContent:"center", position:"relative", overflow:"hidden", minHeight:"340px", borderRight:"1px solid var(--g600)" }}>
             <div style={{ position:"absolute", inset:0, backgroundImage:"linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px)", backgroundSize:"18px 18px" }}/>
-            <div style={{ width:"80px", height:"80px", border:"1px solid rgba(255,255,255,0.14)", borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"var(--fd)", fontSize:"22px", color:"rgba(255,255,255,0.28)", zIndex:1 }}>HC</div>
+            <div style={{ width:"80px", height:"80px", border:"1px solid var(--g600)", borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"var(--fd)", fontSize:"22px", color:"var(--g400)", zIndex:1 }}>HC</div>
             <div style={{ position:"absolute", bottom:"16px", fontSize:"9px", color:"var(--g600)", letterSpacing:"0.15em", zIndex:1 }}>[ ADD HEADSHOT ]</div>
           </div>
           <div style={{ padding:"44px" }}>
             <div style={{ fontSize:"9px", color:"var(--g400)", letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"8px" }}>Founder & CEO</div>
-            <div style={{ fontFamily:"var(--fs)", fontSize:"30px", marginBottom:"22px" }}>Hsu, Chen</div>
+            <div style={{ fontFamily:"var(--fd)", fontSize:"30px", marginBottom:"22px" }}>Hsu, Chen</div>
             <p style={{ color:"var(--g400)", fontSize:"13px", lineHeight:1.9, fontStyle:"italic", marginBottom:"28px" }}>
               [ Founder bio placeholder — replace with your own. Describe your background, domain expertise, the vision behind Ichorai, and what drove you to build Industrial AI. Include any relevant experience in healthcare technology, AI/ML research, business building, or deep domain sectors. ]
             </p>
@@ -40,18 +40,18 @@ function PeoplePage({ navigate }) {
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"2px", marginBottom:"56px" }}>
           {[
             { role:"Lead Architect — Industrial 5.0", bio:"[ Seeking an Industrial 5.0 Specialist with expertise in probabilistic generative models, NLP, and cyber-physical system architecture. ]" },
-            { role:"Full-Stack Engineer", bio:"[ React/Python engineer for the Domain Injection Interface and core platform infrastructure. Healthcare data standards (FHIR, HL7) a plus. ]" },
+            { role:"Full-Stack Engineer", bio:"[ React/Python engineer for the Graphical Interface and core platform infrastructure. Healthcare data standards (FHIR, HL7) a plus. ]" },
           ].map((p,i) => (
-            <div key={i} style={{ border:"1px solid rgba(255,255,255,0.07)" }}>
-              <div style={{ background:"var(--g900)", height:"190px", display:"flex", alignItems:"center", justifyContent:"center", position:"relative", overflow:"hidden", borderBottom:"1px solid rgba(255,255,255,0.07)" }}>
+             <div key={i} style={{ border:"1px solid var(--g600)" }}>
+               <div style={{ background:"var(--g900)", height:"190px", display:"flex", alignItems:"center", justifyContent:"center", position:"relative", overflow:"hidden", borderBottom:"1px solid var(--g600)" }}>
                 <div style={{ position:"absolute", inset:0, backgroundImage:"linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px)", backgroundSize:"16px 16px" }}/>
-                <div style={{ width:"60px", height:"60px", border:"1px solid rgba(255,255,255,0.1)", borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"var(--fd)", fontSize:"16px", color:"rgba(255,255,255,0.18)", zIndex:1 }}>—</div>
+                <div style={{ width:"60px", height:"60px", border:"1px solid var(--g600)", borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"var(--fd)", fontSize:"16px", color:"var(--g400)", zIndex:1 }}>—</div>
                 <div style={{ position:"absolute", bottom:"12px", fontSize:"9px", color:"var(--g600)", letterSpacing:"0.15em", zIndex:1 }}>POSITION OPEN</div>
               </div>
               <div style={{ padding:"28px" }}>
                 <div style={{ fontSize:"9px", color:"var(--amber)", letterSpacing:"0.2em", border:"1px solid rgba(255,184,77,0.3)", display:"inline-block", padding:"2px 8px", marginBottom:"10px" }}>PLACEHOLDER</div>
                 <div style={{ fontSize:"9px", color:"var(--g400)", letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"6px" }}>{p.role}</div>
-                <div style={{ fontFamily:"var(--fs)", fontSize:"20px", marginBottom:"14px", color:"var(--g400)", fontStyle:"italic" }}>[ Position Open ]</div>
+                <div style={{ fontFamily:"var(--fd)", fontSize:"20px", marginBottom:"14px", color:"var(--g400)", fontStyle:"italic" }}>[ Position Open ]</div>
                 <p style={{ color:"var(--g400)", fontSize:"12px", lineHeight:1.8, fontStyle:"italic" }}>{p.bio}</p>
                 <button className="btn-p" onClick={() => navigate("careers")} style={{ marginTop:"20px", fontSize:"10px", padding:"8px 20px" }}>View Open Role →</button>
               </div>

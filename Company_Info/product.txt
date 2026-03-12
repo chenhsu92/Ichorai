@@ -1,0 +1,208 @@
+3. Description of Product and Services
+Ichorai is helping deep domain sectors transition to Industry 4.0, while actively
+investing in R&D to allow our clients build towards an Industry 5.0 future. Table 1
+below categorises the five problems listed prior into different stages of industrial
+revolution.
+Table 1. Problem Categorisation by Industrial Revolution Stage
+Revolution Stage Problem Statement
+Industry 4.0
+• The Capability Gap: Domain Expertise vs. Software
+Engineering
+• Deep Domains’ Complex Data
+• Inadequacy of Existing Solutions (Domain Knowhow)
+• AI’s Dehumanisation
+Industry 5.0
+Digitising the Past vs. Designing the Future
+3.1 Industry 4.0: Ichorai’s Industrial AI PaaS
+Ichorai provides the Industrial AI: the essential support capability enabling “Deep
+Domain” sectors such as Logistics, Energy, and Healthcare to deploy proprietary,
+high-performance AI without transforming into software companies.
+We deliver a Standardised Assembly Line for Domain Intelligence. Moving beyond
+raw compute and rigid off-the-shelf SaaS solutions, we provide a scalable,
+industrial-grade foundation designed to bridge the gap abstract computation and
+reality.
+3.1.1 Core Architecture: Data Manager + Digital Twin (The 80/20% Framework)
+Our core deployment is powered by a Data Manager + Digital Twin structure, utilising
+an 80/20% Framework designed to accelerate AI integration and delivering
+custom digital twin, shown in Figure 1.
+10
+Ichorai— Business Proposal Confidential
+Figure 1. The Ichorai 80/20% Framework: Data Manager (foundation) and Digital Twin (customisable
+layer).
+80% Standard Architecture (Data Manager). The primary technical challenge in
+“Deep Domain” sectors is the fragmentation of data infrastructure. Data Manager is
+designed to normalise disparate industrial signals into a coherent digital substrate
+through the Data Injector and a Data Lake. A library of industry ontologies will
+also be constructed through our various partners.
+Data Manager resolves “noisy data” and fragmentation immediately out of the
+box. It maps the in-coming data into one of the pre-defined Ichorai Architectures.
+This ensures cheaper and efficient data processing. Because the system is mapping
+client’s operation to a set of architectural blueprints, it cannot fully satisfy the
+client’s needs, we can assume it ahcieved roughly 80% match.
+20% Flexible Adjustments (Digital Twin). To resolve the remaining 20% discrepancy,
+we are developing the Ichorai Architecture Optimiser, it is a knowledgeguided
+Small Language Model that encodes domain-specific operational constraints
+and physical boundaries directly into the model’s latent space, enabling
+sample-efficient learning and verifiable reasoning with minimal parameter count.
+This system fine-tunes the ontology blueprint to match a new client’s existing
+ontology in the physical world.
+Our approach draws inspiration from advances in physics-informed machine
+learning. By treating operational constraints as soft penalties during training
+11
+Ichorai— Business Proposal Confidential
+and hard boundaries during inference, we aim to achieve "verifiable AI" - the
+model’s output space is constrained by allowed real-world limits. Our innovation
+lies in combining the "physics-informed" aspect of PINNs to a transformer
+architecture. This is grounded in published academic literature: Raissi, Perdikaris
+& Karniadakis (2019) established the foundational physics-informed neural network
+(PINN) framework, demonstrating how physical constraints can be encoded
+as loss-function penalties. [14] Our technical development involves modelling
+ontologies as continuous physical PDEs.
+The User-Interface of the Ichorai Architecture Optimiser on the client side is
+purely graphical. Clients can adjust the ontology represented on the system if
+required, allowing domain experts (e.g., clinicians or logistics managers) to interact
+with the digital twin with no software expertise required. This ensures the final
+output is not generic, but a proprietary asset tailored to specific organisational
+needs.
+3.1.2 Solving the Pain Point
+Our initial deployment targets the Healthcare sector, specifically Long-Term Care
+(LTC). This system is being developed through our partnership with the Hsiao
+Chung-Cheng (HCC) Healthcare Group, ensuring the effectiveness of our Data
+Manager in complex, multi-campus environments. For detailed description on
+discussions and product feedback with HCC check Section 2.2.1.
+After deploying our system, a healthcare organisation’s daily operation is streamlined.
+The crisis of navigating multiple systems and manually copying data from
+one system to the other is replaced by a single, intelligent dashboard. This directly
+cures the pain of administrative overload. Due to the Goldilocks nature of our
+solution compared to existing ones on the market, it will be a lot cheaper for the
+client and better after-sales service in the form of software support. All of Ichorai’s
+Architecture blueprints put significant emphasis on how human can contribute,
+ensuring our AI’s role is support, not replacement.
+3.1.3 Design to Distribution
+Our "living lab" partnership with HCC serves as the primary demonstration
+environment, proving the platform’s effectiveness in a live, complex healthcare
+environment. The effectiveness of Ichorai Architecture Optimiser will be tested
+with our secondary clients through IKO Life and G-Clinic. In the short-term, as a
+platform-as-as service (PaaS), our production model is cloud-native. In Asia Pacific,
+the solution is distributed via secure data centre in collaboration with Taiwan
+National Institute of Applied Research, National Centre for High-performance
+Computing. For the long-term, Ichorai is in active discussion with Tenstorrent
+to develop the "middle-edge" - on premise small servers to ensure domain data
+never have to leave the client.
+12
+Ichorai— Business Proposal Confidential
+Our primary and secondary customers will pay an upfront NRE (Non-Recurring
+Engineering) during initial development and further subscription fees for using
+this service. However, since Ichorai’s healthcare ontology library is developed
+based on partial information through our primary and secondary partners, they
+are entitled to some commission when future customers use their blueprint as the
+foundation. Upon subscription, clients are granted secure access to their dedicated
+instance of the Ichorai platform, with the Data Manager configured to interface
+with their existing legacy systems via APIs.
+3.1.4 Resources
+The execution of R&D for this product requires concrete knowledge in Mathematical
+Modelling and Software Development,this is secured through the founder’s
+background in Mechanical Engineering with minor in Intelligent Systems. There
+are also planned recruitment of a Lead Architect and Algorithm Researcher. Time
+is managed via our phased approach and work packages in our operational plan.
+Money for these development stages have been considered through founder and
+co-founder’s own funds and initial NREs from launch clients. 15% contingency
+will be applied to all R&D operational expenses to mitigate against unforeseen
+technical challenges.
+Our core innovation with Ichorai Architecture Optimiser is the way we use
+physics to guide how our AI train and inference and applied to an industrial
+setting. To keep our tech secure, we’re ensuring all founders, staff, and outside
+contractors sign agreements giving the company full ownership of everything they
+build. We’ve set aside budget for lawyers to assist us to patent this for Intellectual
+Property protection,
+3.2 Industry 5.0: The Generative Archetype Engine (Long-Term
+Ambition)
+While Industry 4.0 focuses on digitising existing assets for optimisation, Ichorai is
+pioneering the Digital-First Inversion of Industry 5.0. Our roadmap moves from
+optimising existing facilities to generating the blueprints for future infrastructure.
+As a future project, we will research into the development of the Generative
+Archetype Engine (GAE) using the foundation of the Ichorai Architecture Optimiser.
+GAE is envisioned to be a world-modelling AI system capable of capturing
+the operational logic of an enterprise while adapting to the local environments
+and regulations, acting as the "Logic Container".
+The Concept: Rather than retrofitting a physical factory, the GAE allows organisations
+to load “Medium-Sized Infrastructure” requirements onto our platform.
+Socio-Industrial Synthesis: The AI generates precise physical specifications tai-
+13
+Ichorai— Business Proposal Confidential
+lored to local environmental, economic, and social conditions.
+Outcome: A shift away from “Gigafactories” toward a distributed network of
+sustainable hubs that prioritise the livelihoods of residents and sustainability.
+Strategic Advantage: Ichorai is uniquely positioned to lead this transition. For
+Industry 4.0, the Ichorai Architecture Optimiser would have developed sophisticated
+data lineage. This lineage serves as the training ground for the Generative
+Archetype Engine, allowing us to evolve from optimising what exists to generating
+what should be—ensuring the digital form is perfected before the physical
+foundation is laid.
+4. Research and Development
+4.1 Phase 1—R&D for Industrial 4.0 (Industrial AI)
+Our R&D strategy is structured to keep the core innovative aspect of our solution
+in-house while outsourcing mature technology to project-based companies that
+have years of experience building reliable digital twins.
+Figure 2. The Ichorai 80/20% Framework: IP Ownership
+Referring to Figure 2, the Green highlight showcases the core Ichorai proprietary
+technology, the Ichorai Architecture Optimiser. It is going to be developed in-
+14
+Ichorai— Business Proposal Confidential
+house by the UK-based team. Blue highlight shows outsourced development
+but still Ichorai owned, these are legacy technologies with many companies in
+Asia Pacific or Eastern Europe capable of producing them cheaply and reliably.
+Currently we are in active discussion with a team based in Taiwan that is eager to
+take on this project.
+Ichorai is in active discussion to numerous experienced teams from Taiwan and
+UK. Once we finalised our partner, we will execute: (a) a mutual NDA covering
+all technical specifications; (b) a Statement ofWork (SOW) with clear milestones
+and acceptance criteria; and (c) an explicit IP Assignment clause ensuring that all
+developed code, architectures, and derivative works are the property of Ichorai.
+Brown highlights represents client owned, these are all blocks where their domain
+know-how is the biggest asset. Ichorai provides the standard architecture and the
+intelligence to adapt it to meet every client’s needs, but the operational experience
+and medical expertise must come from the clients themselves. Red highlights are
+open source standards like API or MCP Ichorai use to extract data from data silos,
+or computer vision algorithms to log paper-data into the system quickly.
+4.2 Phase 2—R&D for Industrial 5.0 (GAE)
+We are brainstorming the application of Probabilistic Generative Models to simulate
+complex industrial ecosystems. The GAE does not just optimise a single
+variable (e.g., efficiency); it solves for a multi-objective function we call Socio-
+Industrial Synthesis, where a range of factors concerning the sustainability of the
+business in the local environment is considered.
+• Input Vectors: The model ingests diverse high-dimensional data, including
+local labour demographics, environmental constraints (water table levels, solar
+irradiance), and supply chain logistics.
+• Simulation Environment: We are researching a “Digital Twin” sandbox where
+the AI iterates through thousands of potential factory configurations per second.
+• Evolutionary Optimization: The system may use genetic algorithms to “breed”
+the optimal facility design, discarding configurations that fail sustainability or
+social livelihood metrics, and evolving those that succeed.
+4.3 Technical Validation & Roadmap
+4.3.1 Phase 1
+Current Status (TRL 3): We have achieved Experimental Proof of Concept for Data
+Manager. The core Industrial AI architecture has been successfully validated in a
+controlled laboratory setting using sample data extracts from HCC, confirming
+15
+Ichorai— Business Proposal Confidential
+the feasibility of our Data Manager + Digital Twin structure.
+Current Status (TRL 1): The Ichorai Architecture Optimiser is currently in the
+Basic Principles Phase. We are actively formulating the mathematical architecture
+and theoretical constraints that will eventually govern the system’s logic, laying
+the scientific groundwork before coding begins.
+Next Milestone (TRL 5): Our immediate objective is to advance to Validation in a
+Relevant Environment. We will scale our testing to ingest full historical datasets
+from HCC facilities, running Industrial AI as a “shadow system” to verify fidelity
+against real-world complexity without impacting live operations.
+Future Horizon (TRL 7–9): Full deployment serving a diverse range of customers.
+4.3.2 Decoupled Value Proposition
+The commercial viability of Ichorai is decoupled from the developmental timeline
+of the Architecture Optimiser. While the Optimiser is at TRL 1, the Data Manager
+(TRL 3) delivers immediate, independent utility by resolving the "Invisible Infrastructure
+Crisis" and administrative backlogs for HCC, our launch client. HCC can
+see the immediate value from the Data Manager’s ability to normalise fragmented
+data signals, which serves as the assurance for early revenue generation. The
+Architecture Optimiser functions as an iterative enhancement layer. Essentially,
+for the first 2 years Ichorai resembles a project-based consultant, but our work all
+leads to PaaS.

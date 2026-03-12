@@ -32,18 +32,18 @@ function ApplicationModal({ role, onClose }) {
 
   return (
     <div style={{ position:"fixed", inset:0, zIndex:2000, background:"rgba(0,0,0,0.93)", backdropFilter:"blur(10px)", display:"flex", alignItems:"center", justifyContent:"center", padding:"20px", animation:"fadeIn 0.25s ease" }}>
-      <div style={{ background:"var(--g900)", border:"1px solid rgba(255,255,255,0.12)", width:"100%", maxWidth:"660px", maxHeight:"90vh", overflow:"auto" }}>
+      <div style={{ background:"var(--g900)", border:"1px solid var(--g600)", width:"100%", maxWidth:"660px", maxHeight:"90vh", overflow:"auto" }}>
         {/* Header */}
-        <div style={{ padding:"26px 30px", borderBottom:"1px solid rgba(255,255,255,0.07)", position:"sticky", top:0, background:"var(--g900)", zIndex:1 }}>
+        <div style={{ padding:"26px 30px", borderBottom:"1px solid var(--g800)", position:"sticky", top:0, background:"var(--g900)", zIndex:1 }}>
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
             <div style={{ flex:1, paddingRight:"18px" }}>
               <div style={{ fontSize:"9px", color:"var(--g400)", letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"5px" }}>Application Portal</div>
               <div style={{ fontFamily:"var(--fd)", fontSize:"20px", lineHeight:1.1 }}>{role.title}</div>
             </div>
-            <button onClick={onClose} style={{ background:"none", border:"1px solid rgba(255,255,255,0.14)", color:"var(--g400)", width:"32px", height:"32px", fontSize:"15px", cursor:"pointer", flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center" }}>✕</button>
+            <button onClick={onClose} style={{ background:"none", border:"1px solid var(--g600)", color:"var(--g400)", width:"32px", height:"32px", fontSize:"15px", cursor:"pointer", flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center" }}>✕</button>
           </div>
           <div style={{ marginTop:"14px", display:"flex", gap:"4px" }}>
-            {[1,2,3].map(s => <div key={s} style={{ height:"2px", flex:1, background:step>=s?"var(--white)":"rgba(255,255,255,0.1)", transition:"background 0.3s" }}/>)}
+            {[1,2,3].map(s => <div key={s} style={{ height:"2px", flex:1, background:step>=s?"var(--white)":"var(--g800)", transition:"background 0.3s" }}/>)}
           </div>
           <div style={{ fontSize:"9px", color:"var(--g600)", letterSpacing:"0.15em", marginTop:"7px" }}>STEP {step}/3 · {stepLabels[step-1]}</div>
         </div>
@@ -73,7 +73,7 @@ function ApplicationModal({ role, onClose }) {
                   <div>
                     <label style={{ fontSize:"10px", color:"var(--g400)", letterSpacing:"0.15em", textTransform:"uppercase", display:"block", marginBottom:"9px" }}>Cover Letter *</label>
                     <textarea value={form.coverLetter} onChange={e=>up("coverLetter",e.target.value)} placeholder="Why Ichorai? What makes you the right person for this role? How does your background align with our mission of Industrial AI that prioritises human prosperity?"
-                      style={{ width:"100%", minHeight:"190px", background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.1)", borderBottom:"1px solid rgba(255,255,255,0.26)", color:"var(--white)", padding:"13px 15px", fontFamily:"var(--fm)", fontSize:"12px", lineHeight:1.8, resize:"vertical", outline:"none" }}/>
+                      style={{ width:"100%", minHeight:"190px", background:"var(--g900)", border:"1px solid var(--g600)", borderBottom:"1px solid var(--g400)", color:"var(--white)", padding:"13px 15px", fontFamily:"var(--fm)", fontSize:"12px", lineHeight:1.8, resize:"vertical", outline:"none", transition:"border-color 0.2s" }}/>
                   </div>
                   <FormField label="Portfolio / GitHub / Links" value={form.portfolio} onChange={v=>up("portfolio",v)} placeholder="github.com/... or portfolio URL"/>
                 </div>
@@ -93,7 +93,7 @@ function ApplicationModal({ role, onClose }) {
                       <div style={{ fontSize:"10px", color:"var(--g600)", marginTop:"5px" }}>PDF, DOC, DOCX · Max 10MB</div>
                     </div>
                   </div>
-                  <div style={{ border:"1px solid rgba(255,255,255,0.07)", padding:"20px" }}>
+                  <div style={{ border:"1px solid var(--g600)", padding:"20px" }}>
                     <div style={{ fontSize:"9px", color:"var(--g600)", letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"14px" }}>Application Summary</div>
                     {[["Role",role.title],["Name",form.name||"—"],["Email",form.email||"—"],["CV",cvFile?cvFile.name:"Not uploaded"]].map(([k,v]) => (
                       <div key={k} style={{ display:"flex", justifyContent:"space-between", marginBottom:"7px", fontSize:"11px" }}>
@@ -106,7 +106,7 @@ function ApplicationModal({ role, onClose }) {
                   <div style={{ fontSize:"10px", color:"var(--g600)", lineHeight:1.7 }}>By submitting, you agree that Ichorai may store and process your application data for recruitment purposes only.</div>
                 </div>
               )}
-              <div style={{ display:"flex", justifyContent:"space-between", marginTop:"32px", paddingTop:"22px", borderTop:"1px solid rgba(255,255,255,0.07)" }}>
+              <div style={{ display:"flex", justifyContent:"space-between", marginTop:"32px", paddingTop:"22px", borderTop:"1px solid var(--g800)" }}>
                 {step>1 ? <button className="btn-g" style={{ fontSize:"10px", padding:"10px 22px" }} onClick={() => setStep(s=>s-1)}>← Back</button> : <div/>}
                 {step<3
                   ? <button className="btn-p" onClick={() => setStep(s=>s+1)} disabled={step===1&&!canNext1} style={{ fontSize:"10px", padding:"10px 26px", opacity:step===1&&!canNext1?0.38:1 }}>Continue →</button>

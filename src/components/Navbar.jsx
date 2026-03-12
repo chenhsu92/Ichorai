@@ -22,9 +22,9 @@ function Navbar({ page, navigate }) {
       position:"fixed", top:0, left:0, right:0, zIndex:1000,
       height:"var(--nav)", padding:"0 48px",
       display:"flex", alignItems:"center", justifyContent:"space-between",
-      background: scrolled ? "rgba(7,7,7,0.97)" : "transparent",
-      backdropFilter: scrolled ? "blur(16px)" : "none",
-      borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
+      background: scrolled ? "rgba(7,7,7,0.98)" : "transparent",
+      backdropFilter: scrolled ? "blur(12px)" : "none",
+      borderBottom: scrolled ? "1px solid var(--g600)" : "none",
       transition:"background 0.4s, border-color 0.4s",
     }}>
       <button onClick={() => navigate("home")} style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:"10px", color:"var(--white)" }}>
@@ -33,17 +33,17 @@ function Navbar({ page, navigate }) {
 
       <div style={{ display:"flex", gap:"28px", alignItems:"center" }}>
         {links.slice(1).map(l => (
-          <button key={l.id} onClick={() => navigate(l.id)} style={{
-            background:"none", border:"none",
-            color: page===l.id ? "var(--white)" : "var(--g400)",
-            fontFamily:"var(--fm)", fontSize:"11px", letterSpacing:"0.14em",
-            textTransform:"uppercase", cursor:"pointer", padding:"4px 0",
-            borderBottom: page===l.id ? "1px solid var(--white)" : "1px solid transparent",
-            transition:"color 0.2s, border-color 0.2s",
-          }}
-            onMouseEnter={e => e.currentTarget.style.color="var(--white)"}
-            onMouseLeave={e => e.currentTarget.style.color = page===l.id ? "var(--white)" : "var(--g400)"}
-          >{l.label}</button>
+           <button key={l.id} onClick={() => navigate(l.id)} style={{
+             background:"none", border:"none",
+             color: page===l.id ? "var(--green)" : "var(--g400)",
+             fontFamily:"var(--fm)", fontSize:"11px", letterSpacing:"0.14em",
+             textTransform:"uppercase", cursor:"pointer", padding:"4px 0",
+             borderBottom: page===l.id ? "1px solid var(--green)" : "1px solid transparent",
+             transition:"color 0.2s, border-color 0.2s",
+           }}
+             onMouseEnter={e => e.currentTarget.style.color="var(--green)"}
+             onMouseLeave={e => e.currentTarget.style.color = page===l.id ? "var(--green)" : "var(--g400)"}
+           >{l.label}</button>
         ))}
         <button className="btn-p" onClick={() => navigate("contact")} style={{ padding:"8px 20px", fontSize:"10px" }}>Get In Touch</button>
       </div>

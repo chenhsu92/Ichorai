@@ -1,4 +1,4 @@
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -12,59 +12,74 @@
     --g200:     #bbb;
     --green:    #5aff8f;
     --amber:    #ffb84d;
-    --fd: 'Bebas Neue', sans-serif;
+    --fd: 'DM Sans', sans-serif;
     --fm: 'DM Mono', monospace;
-    --fs: 'Playfair Display', serif;
     --nav: 64px;
   }
 
   html { scroll-behavior: smooth; }
   body { background: var(--black); color: var(--white); font-family: var(--fm); overflow-x: hidden; }
-  ::selection { background: var(--white); color: var(--black); }
+  ::selection { background: var(--green); color: var(--black); }
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-track { background: var(--black); }
-  ::-webkit-scrollbar-thumb { background: var(--g600); }
+  ::-webkit-scrollbar-thumb { background: var(--g400); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--green); }
 
   @keyframes fadeUp   { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
   @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
   @keyframes scanline { 0% { top:-4%; } 100% { top:104%; } }
   @keyframes marquee  { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  @keyframes dashH  { to { stroke-dashoffset: -100; } }
+  @keyframes dashV  { to { stroke-dashoffset: -140; } }
+  @keyframes dashI  { to { stroke-dashoffset: -60;  } }
+  @keyframes blink  { 50% { opacity: 0.3; } }
 
   .fu  { animation: fadeUp 0.65s ease both; }
   .fi  { animation: fadeIn 0.9s ease both; }
+  .flow-h-0 { animation: dashH 2.2s linear infinite 0.0s; }
+  .flow-h-1 { animation: dashH 2.2s linear infinite 0.4s; }
+  .flow-h-2 { animation: dashH 2.2s linear infinite 0.8s; }
+  .flow-int { animation: dashI 1.8s linear infinite; }
+  .flow-int2{ animation: dashI 1.8s linear infinite 0.6s; }
+  .flow-v-main { animation: dashV 2.8s linear infinite 0.0s; }
+  .flow-v-0    { animation: dashV 3.2s linear infinite 0.2s; }
+  .flow-v-1    { animation: dashV 3.4s linear infinite 0.6s; }
+  .flow-v-2    { animation: dashV 3.6s linear infinite 1.0s; }
+  .live { animation: blink 2s ease infinite; }
 
   .tag {
-    font-family: var(--fm); font-size: 10px; letter-spacing: 0.26em;
+    font-family: var(--fm); font-size: 10px; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--g400);
-    display: flex; align-items: center; gap: 12px;
+    font-weight: 500;
   }
-  .tag::before { content:''; display:block; width:28px; height:1px; background:var(--g400); }
 
   .gbg {
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 56px 56px;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0);
+    background-size: 20px 20px;
+    background-color: var(--g900);
   }
 
   .card {
-    border: 1px solid rgba(255,255,255,0.07);
-    transition: border-color 0.25s;
+    border: 1px solid var(--g600);
+    background: var(--g800);
+    transition: all 0.25s;
   }
-  .card:hover { border-color: rgba(255,255,255,0.2); }
+  .card:hover { border-color: var(--green); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
 
   .btn-p {
-    background: var(--white); color: var(--black);
-    border: none; padding: 13px 32px;
+    background: var(--green); color: var(--black);
+    border: none; padding: 12px 28px;
     font-family: var(--fm); font-size: 11px; letter-spacing: 0.16em;
-    text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+    font-weight: 500; text-transform: uppercase; cursor: pointer;
+    transition: all 0.2s; border-radius: 2px;
   }
-  .btn-p:hover { background: var(--black); color: var(--white); outline: 1px solid var(--white); }
+  .btn-p:hover { background: var(--white); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(90, 255, 143, 0.2); }
 
   .btn-g {
     background: transparent; color: var(--white);
-    border: 1px solid rgba(255,255,255,0.18); padding: 13px 32px;
+    border: 1px solid var(--g600); padding: 12px 28px;
     font-family: var(--fm); font-size: 11px; letter-spacing: 0.16em;
-    text-transform: uppercase; cursor: pointer; transition: border-color 0.2s;
+    font-weight: 500; text-transform: uppercase; cursor: pointer;
+    transition: all 0.2s; border-radius: 2px;
   }
-  .btn-g:hover { border-color: var(--white); }
+  .btn-g:hover { border-color: var(--green); color: var(--green); transform: translateY(-1px); }

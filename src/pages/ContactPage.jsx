@@ -31,13 +31,13 @@ function ContactPage({ navigate }) {
               { l:"Press & Media",         v:"press@ichorai.com" },
               { l:"Location",              v:"London, United Kingdom" },
             ].map(({ l,v }) => (
-              <div key={l} style={{ padding:"18px 0", borderBottom:"1px solid rgba(255,255,255,0.06)", display:"flex", gap:"28px", alignItems:"center" }}>
+              <div key={l} style={{ padding:"18px 0", borderBottom:"1px solid var(--g800)", display:"flex", gap:"28px", alignItems:"center" }}>
                 <span style={{ fontSize:"10px", color:"var(--g600)", letterSpacing:"0.14em", textTransform:"uppercase", minWidth:"170px" }}>{l}</span>
                 <span style={{ fontSize:"13px", color:"var(--white)" }}>{v}</span>
               </div>
             ))}
 
-            <div style={{ marginTop:"44px", border:"1px solid rgba(255,255,255,0.07)", padding:"26px" }}>
+            <div style={{ marginTop:"44px", border:"1px solid var(--g600)", padding:"26px" }}>
               <div style={{ fontSize:"9px", color:"var(--g400)", letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"18px" }}>Quick Routing Guide</div>
               {[
                 ["Pilot Partnership","Deep domain operator with a noisy data problem? We offer a de-risked pilot model — select a specific domain, prove the value, then scale."],
@@ -45,7 +45,7 @@ function ContactPage({ navigate }) {
                 ["Career Enquiries","Not seeing a role? Send a speculative application. We always have room for exceptional people aligned with our mission."],
               ].map(([t,d]) => (
                 <div key={t} style={{ marginBottom:"16px" }}>
-                  <div style={{ fontSize:"11px", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:"5px" }}>{t}</div>
+                  <div style={{ fontSize:"11px", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:"5px", color:"var(--amber)" }}>{t}</div>
                   <p style={{ color:"var(--g400)", fontSize:"12px", lineHeight:1.7 }}>{d}</p>
                 </div>
               ))}
@@ -55,7 +55,7 @@ function ContactPage({ navigate }) {
           <div>
             <div className="tag" style={{ marginBottom:"32px" }}>Send a Message</div>
             {sent ? (
-              <div style={{ border:"1px solid rgba(90,255,143,0.3)", padding:"44px", textAlign:"center", background:"rgba(90,255,143,0.04)" }}>
+              <div style={{ border:"1px solid var(--green)", padding:"44px", textAlign:"center", background:"rgba(90,255,143,0.04)" }}>
                 <div style={{ fontFamily:"var(--fd)", fontSize:"34px", marginBottom:"14px" }}>MESSAGE SENT</div>
                 <p style={{ color:"var(--g400)", fontSize:"13px" }}>We'll be in touch shortly.</p>
               </div>
@@ -65,18 +65,22 @@ function ContactPage({ navigate }) {
                 <FormField label="Email *" value={form.email} onChange={v=>up("email",v)} placeholder="you@email.com" type="email"/>
                 <div>
                   <label style={{ fontSize:"10px", color:"var(--g400)", letterSpacing:"0.15em", textTransform:"uppercase", display:"block", marginBottom:"9px" }}>Subject</label>
-                  <select value={form.subject} onChange={e=>up("subject",e.target.value)} style={{ width:"100%", background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.1)", borderBottom:"1px solid rgba(255,255,255,0.26)", color:"var(--white)", padding:"12px 15px", fontFamily:"var(--fm)", fontSize:"12px", outline:"none" }}>
-                    <option value="general"    style={{background:"#111"}}>General Enquiry</option>
-                    <option value="pilot"      style={{background:"#111"}}>Pilot Partnership</option>
-                    <option value="investment" style={{background:"#111"}}>Investment</option>
-                    <option value="careers"    style={{background:"#111"}}>Careers / Speculative</option>
-                    <option value="press"      style={{background:"#111"}}>Press & Media</option>
+                  <select value={form.subject} onChange={e=>up("subject",e.target.value)} style={{ width:"100%", background:"var(--g900)", border:"1px solid var(--g600)", borderBottom:"1px solid var(--g400)", color:"var(--white)", padding:"12px 15px", fontFamily:"var(--fm)", fontSize:"12px", outline:"none", transition:"border-color 0.2s" }}
+                    onFocus={e => e.target.style.borderBottomColor="var(--green)"}
+                    onBlur={e => e.target.style.borderBottomColor="var(--g400)"}>
+                    <option value="general"    style={{background:"var(--g900)"}}>General Enquiry</option>
+                    <option value="pilot"      style={{background:"var(--g900)"}}>Pilot Partnership</option>
+                    <option value="investment" style={{background:"var(--g900)"}}>Investment</option>
+                    <option value="careers"    style={{background:"var(--g900)"}}>Careers / Speculative</option>
+                    <option value="press"      style={{background:"var(--g900)"}}>Press & Media</option>
                   </select>
                 </div>
                 <div>
                   <label style={{ fontSize:"10px", color:"var(--g400)", letterSpacing:"0.15em", textTransform:"uppercase", display:"block", marginBottom:"9px" }}>Message *</label>
                   <textarea value={form.message} onChange={e=>up("message",e.target.value)} placeholder="Tell us about your organisation, challenge, or vision..."
-                    style={{ width:"100%", minHeight:"140px", background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.1)", borderBottom:"1px solid rgba(255,255,255,0.26)", color:"var(--white)", padding:"13px 15px", fontFamily:"var(--fm)", fontSize:"12px", lineHeight:1.8, resize:"vertical", outline:"none" }}/>
+                    style={{ width:"100%", minHeight:"140px", background:"var(--g900)", border:"1px solid var(--g600)", borderBottom:"1px solid var(--g400)", color:"var(--white)", padding:"13px 15px", fontFamily:"var(--fm)", fontSize:"12px", lineHeight:1.8, resize:"vertical", outline:"none", transition:"border-color 0.2s" }}
+                    onFocus={e => e.target.style.borderBottomColor="var(--green)"}
+                    onBlur={e => e.target.style.borderBottomColor="var(--g400)"}/>
                 </div>
                 <button className="btn-p" onClick={send} disabled={!form.name||!form.email||!form.message} style={{ width:"100%", padding:"15px", opacity:!form.name||!form.email||!form.message?0.38:1 }}>
                   Send Message →

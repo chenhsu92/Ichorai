@@ -1,0 +1,75 @@
+2.3 Competitor Analysis
+As stated in problem statement, aside from legacy systems the current market
+for industrial AI is polarised between two extremes: rigid, general-purpose platforms
+that lack domain nuance, and adaptable, service-heavy consultancies that
+is insanely expensive. There are also tools available to build digital twin but this
+requires the company to build their own software team.
+2.3.1 Group 1: The "Operating System" Giants
+(e.g., Palantir Foundry, d.AP)
+Service: These players offer powerful, general-purpose data operating systems.
+They build every client’s ontology from the ground-up to achieve optimal match
+to unlock massive efficiency gains, essentially a "cold start" approach. The ROI for
+large cooperation that use their service are often significant.
+The Limitation: For a small clinic alliance, mid-sized healthcare group or a regional
+manufacturer, these tools are overkill and way overpriced, hence they are
+still forced to stick with legacy systems. The upfront cost of building a proprietary
+ontology from the ground up is impossible for these companies. If we take Palantir
+as an example, they signed a 7-year £330 million deal with NHS. [10].
+Existing Users: The customers of these services are very large organisations
+(often with annual revenue above £500m) that are willing to pay a premium for
+significant, organisation-wide gains, at the current scope they are not my target
+audience.
+2.3.2 Group 2: The Project-Based Consultancies
+(e.g., Blue Projects, Zutari, Akselos, and the growing-wave of AI "Implementation"
+firms)
+Service: These firms build custom solutions for specific problems offering good
+flexibility.
+The Limitation: Zero Scalability. They treat every deployment as a new project
+rather than a standardised deployment process. This results in “technical debt”
+where the client becomes dependent on the consultancy, limiting their freedom to
+make operational changes as a company. The software support for new features
+are also limited due to the diversity of their products, leading to outdated system
+for the client after a few years.
+8
+Ichorai— Business Proposal Confidential
+Existing Users: SMEs who can’t afford Group 1 services but want to experiment
+with AI currently settle for this, yet according to The British Chambers of Commerce
+report only 11% are using to "great extent" to automate and streamline
+operations, indicating dissatisfaction with the service SMEs are receiving. [11]
+The lesson gained from here for Ichorai is that AI tools don’t deliver value, only
+AI-ready operations do.
+2.3.3 Group 3a: Legacy Systems - AI Rejects (Do nothing)
+(e.g., MEDITECH, CPSI, Epic/Cerner)
+Service: These are the massive, entrenched systems of record that currently hold
+the data. In our pilot, these are represented by systems like Yangming HIS and
+Norak.
+The Limitation: Data Silos. These systems are designed to store records, not
+to support intelligence. They are notoriously rigid, preventing the interchange
+of data (e.g., linking clinical pharmacy data with financial supply chain logic).
+This is no longer a viable option, in the mega-trend of AI utilisation in industry
+along with UK government’s £250bn investment, a company relying on traditional
+operation methods can’t compete with a modern, fully digitalised corporate. Over
+54% of business executives believe that their businesses will not survive beyond
+2030 without embracing AI at scale. [12]
+Existing Users: SMEs are scrambling for solutions. A report indicates that 55% of
+small businesses are increasing tech adoption entering 2026. [13]
+2.3.4 Group 3b: Healthcare Interoperability Middleware & Enterprise Ecosystems
+(e.g., Oracle Health, Siemens, Microsoft Foundry, Rhapsody, Enovacom, Mirth
+Connect )
+Service: These systems attempts to address the issues identified in the problem
+statement, but the method differs. Rhapsody and Mirth Connect (now primarily
+commercial) provide high-performance FHIR/HL7 middleware. Microsoft offers a
+sophisticated FHIR lake + AI stack via Azure Health Data Services, while Siemens
+Healthineers provides operational digital twins for high-end hospital workflows.
+There are also UK-native platforms like System C and Smart Care Intel target the
+LTC sector with integrated care records and CQC-aligned intelligence.
+The Limitation: These solutions are Rule-Heavy and Expert-Dependent. Traditional
+middleware (Rhapsody/Enovacom) requires advanced manual scripting
+and domain-expert intervention to map disparate systems—a process that often
+results in "black-box" implementations for SMEs who lack dedicated software
+teams. Furthermore, enterprise stacks like Microsoft Fabric or Siemens are primarily
+designed for flagship hospital trusts and mega-enterprises, making them
+9
+Ichorai— Business Proposal Confidential
+cost-prohibitive or technically overwhelming for mid-market LTC groups and
+logistics providers.

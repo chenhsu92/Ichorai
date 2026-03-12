@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ichorai System Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:         #F4F4F1;
+  --surface:    #FFFFFF;
+  --border:     #C8C8C0;
+  --border-dk:  #1A1A18;
+  --mint:       #3DC98A;
+  --mint-light: #E8F9F1;
+  --mint-dark:  #1A7A4A;
+  --sage:       #7ABFA0;
+  --ink:        #1A1A18;
+  --ink-mid:    #4A4A44;
+  --ink-light:  #9A9A90;
+  --mono: 'DM Mono', 'Courier New', monospace;
+  --sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+}
+body {
+  background: #EAEAE5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  font-family: var(--mono);
+}
+.header {
+  width: 100%; max-width: 900px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 18px;
+  animation: fadeUp 0.55s ease both;
+}
+.header-sub { font-size: 8.5px; color: var(--ink-light); letter-spacing: 3px;
+  text-transform: uppercase; margin-bottom: 5px; }
+.header-title { font-family: var(--sans); font-size: 20px; color: var(--ink);
+  letter-spacing: 1.5px; font-weight: 600; }
+.header-title span { font-size: 11px; color: var(--mint); margin-left: 10px;
+  font-family: var(--mono); font-weight: 400; }
+.header-right { display: flex; gap: 14px; align-items: center; }
+.live-wrap { display: flex; align-items: center; gap: 6px;
+  font-size: 7.5px; color: var(--ink-light); letter-spacing: 2px; }
+.live-dot { width: 6px; height: 6px; border-radius: 50%;
+  background: var(--mint); animation: blink 2s ease infinite; }
+.btn-export {
+  background: none; border: 1px solid var(--border);
+  color: var(--ink-mid); font-size: 7.5px; font-family: var(--mono);
+  letter-spacing: 2px; padding: 6px 14px; cursor: pointer;
+  text-transform: uppercase; border-radius: 2px; transition: all 0.2s;
+}
+.btn-export:hover { border-color: var(--mint); color: var(--mint-dark); }
+svg { display: block; }
+.legend {
+  width: 100%; max-width: 900px;
+  display: flex; gap: 28px; margin-top: 14px; flex-wrap: wrap;
+  animation: fadeUp 0.55s ease 0.45s both; opacity: 0;
+}
+.legend-item { display: flex; align-items: center; gap: 8px; }
+.legend-line { width: 20px; height: 1.5px; }
+.legend-label { font-size: 8px; color: var(--ink-light); letter-spacing: 0.8px; }
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes blink { 50% { opacity: 0.3; } }
+@keyframes dashH { to { stroke-dashoffset: -100; } }
+@keyframes dashV { to { stroke-dashoffset: -140; } }
+@keyframes dashI { to { stroke-dashoffset: -60;  } }
+
+.flow-h-0 { animation: dashH 2.2s linear infinite 0.0s; }
+.flow-h-1 { animation: dashH 2.2s linear infinite 0.4s; }
+.flow-h-2 { animation: dashH 2.2s linear infinite 0.8s; }
+.flow-int  { animation: dashI 1.8s linear infinite 0.0s; }
+.flow-int2 { animation: dashI 1.8s linear infinite 0.5s; }
+.flow-v-main { animation: dashV 2.8s linear infinite 0.0s; }
+.flow-v-0    { animation: dashV 3.2s linear infinite 0.2s; }
+.flow-v-1    { animation: dashV 3.4s linear infinite 0.6s; }
+.flow-v-2    { animation: dashV 3.6s linear infinite 1.0s; }
+
+/* Staggered box reveals */
+.box-0 { animation: fadeUp 0.45s ease 0.30s both; opacity: 0; }
+.box-1 { animation: fadeUp 0.45s ease 0.45s both; opacity: 0; }
+.box-2 { animation: fadeUp 0.45s ease 0.55s both; opacity: 0; }
+.box-3 { animation: fadeUp 0.45s ease 0.60s both; opacity: 0; }
+.box-4 { animation: fadeUp 0.45s ease 0.60s both; opacity: 0; }
+.box-5 { animation: fadeUp 0.45s ease 0.72s both; opacity: 0; }
+.box-6 { animation: fadeUp 0.45s ease 0.84s both; opacity: 0; }
+.box-7 { animation: fadeUp 0.45s ease 0.96s both; opacity: 0; }
+.diagram { animation: fadeUp 0.6s ease 0.1s both; opacity: 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <p class="header-sub">Ichorai Industrial AI · System Architecture</p>
+    <h1 class="header-title">The 80/20 Framework <span>v2.1</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="live-wrap">
+      <span class="live-dot"></span>
+      TRL-3 VALIDATED
+    </div>
+    <button class="btn-export" onclick="exportPNG()">↓ Export PNG</button>
+  </div>
+</div>
+
+<svg id="diagram" class="diagram" width="900" height="620" viewBox="0 0 900 620"
+  xmlns="http://www.w3.org/2000/svg"
+  style="background:#F4F4F1; border:1px solid #C8C8C0;">
+
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.9" fill="#C8C8C0" fill-opacity="0.45"/>
+    </pattern>
+    <linearGradient id="dtGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3DC98A" stop-opacity="0.055"/>
+      <stop offset="100%" stop-color="#3DC98A" stop-opacity="0.01"/>
+    </linearGradient>
+    <linearGradient id="dmGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#C89030" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#C89030" stop-opacity="0.01"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="#F4F4F1"/>
+  <rect width="900" height="620" fill="url(#dots)"/>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- DIGITAL TWIN (y=28, h=238)                    -->
+  <!-- ══════════════════════════════════════════════ -->
+  <rect x="32" y="28" width="836" height="238" rx="4"
+    fill="url(#dtGrad)" stroke="#1A1A18" stroke-width="0.7" stroke-opacity="0.35" stroke-dasharray="7 5"/>
+
+  <!-- Section label pill -->
+  <rect x="48" y="16" width="112" height="24" rx="12"
+    fill="#FFFFFF" stroke="#1A1A18" stroke-width="0.7" stroke-opacity="0.45"/>
+  <text x="104" y="29" text-anchor="middle" dominant-baseline="middle"
+    fill="#1A1A18" font-size="8.5" font-family="'DM Mono',monospace" font-weight="500" letter-spacing="2.5">
+    DIGITAL TWIN
+  </text>
+
+  <!-- 20% badge -->
+  <rect x="800" y="38" width="56" height="16" rx="8"
+    fill="#E8F9F1" stroke="#3DC98A" stroke-width="0.7"/>
+  <text x="828" y="47" text-anchor="middle" dominant-baseline="middle"
+    fill="#1A7A4A" font-size="7" font-family="'DM Mono',monospace" font-weight="500" letter-spacing="1">
+    20% LAYER
+  </text>
+
+  <!-- ─── Architecture Optimiser ─── -->
+  <g class="box-0">
+    <rect x="58" y="74" width="298" height="172" rx="3" fill="#1A1A18" fill-opacity="0.06"/>
+    <rect x="56" y="72" width="298" height="172" rx="3" fill="#FFFFFF" stroke="#C8C8C0" stroke-width="0.85"/>
+    <rect x="56" y="72" width="298" height="3.5" rx="1.5" fill="#1A1A18"/>
+    <!-- Badge -->
+    <rect x="66" y="85" width="82" height="15" rx="7.5" fill="#F0F0EC" stroke="#1A1A18" stroke-width="0.6"/>
+    <text x="107" y="93" text-anchor="middle" dominant-baseline="middle"
+      fill="#4A4A44" font-size="6.5" font-family="'DM Mono',monospace" font-weight="500" letter-spacing="1">
+      CORE ENGINE
+    </text>
+    <!-- Texture lines -->
+    <line x1="68" y1="216" x2="342" y2="216" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.6"/>
+    <line x1="68" y1="226" x2="248" y2="226" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.4"/>
+    <!-- Label -->
+    <text x="205" y="149" text-anchor="middle" dominant-baseline="middle"
+      fill="#1A1A18" font-size="11" font-family="'DM Sans',sans-serif" font-weight="600" letter-spacing="0.2">
+      Architecture Optimiser
+    </text>
+    <text x="205" y="164" text-anchor="middle" dominant-baseline="middle"
+      fill="#9A9A90" font-size="7.5" font-family="'DM Mono',monospace" letter-spacing="0.2">
+      physics-informed SLM · no-code UI
+    </text>
+  </g>
+
+  <!-- ─── Intelligence Layer group border ─── -->
+  <rect x="402" y="72" width="410" height="172" rx="3"
+    fill="none" stroke="#3DC98A" stroke-width="0.7" stroke-dasharray="5 5" stroke-opacity="0.5"/>
+  <rect x="414" y="62" width="122" height="20" rx="10"
+    fill="#FFFFFF" stroke="#3DC98A" stroke-width="0.65"/>
+  <text x="475" y="72.5" text-anchor="middle" dominant-baseline="middle"
+    fill="#1A7A4A" font-size="7" font-family="'DM Mono',monospace" font-weight="500" letter-spacing="1.5">
+    INTELLIGENCE LAYER
+  </text>
+
+  <!-- ─── Dashboard box ─── -->
+  <g class="box-1">
+    <rect x="418" y="88" width="187" height="146" rx="3" fill="#1A1A18" fill-opacity="0.06"/>
+    <rect x="416" y="86" width="187" height="146" rx="3" fill="#FFFFFF" stroke="#C8C8C0" stroke-width="0.85"/>
+    <rect x="416" y="86" width="187" height="3.5" rx="1.5" fill="#3DC98A"/>
+    <line x1="428" y1="204" x2="591" y2="204" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.6"/>
+    <line x1="428" y1="214" x2="540" y2="214" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="509.5" y="153" text-anchor="middle" dominant-baseline="middle"
+      fill="#1A1A18" font-size="11" font-family="'DM Sans',sans-serif" font-weight="600">Dashboard</text>
+    <text x="509.5" y="168" text-anchor="middle" dominant-baseline="middle"
+      fill="#9A9A90" font-size="7.5" font-family="'DM Mono',monospace" letter-spacing="0.2">
+      intelligent operations
+    </text>
+  </g>
+
+  <!-- ─── AI Agents box ─── -->
+  <g class="box-2">
+    <rect x="616" y="88" width="187" height="146" rx="3" fill="#1A1A18" fill-opacity="0.06"/>
+    <rect x="614" y="86" width="187" height="146" rx="3" fill="#FFFFFF" stroke="#C8C8C0" stroke-width="0.85"/>
+    <rect x="614" y="86" width="187" height="3.5" rx="1.5" fill="#7ABFA0"/>
+    <line x1="626" y1="204" x2="789" y2="204" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.6"/>
+    <line x1="626" y1="214" x2="740" y2="214" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="707.5" y="153" text-anchor="middle" dominant-baseline="middle"
+      fill="#1A1A18" font-size="11" font-family="'DM Sans',sans-serif" font-weight="600">AI Agents</text>
+    <text x="707.5" y="168" text-anchor="middle" dominant-baseline="middle"
+      fill="#9A9A90" font-size="7.5" font-family="'DM Mono',monospace" letter-spacing="0.2">
+      agentic automation
+    </text>
+  </g>
+
+  <!-- Arrow: Optimiser → Intelligence group -->
+  <line x1="354" y1="158" x2="402" y2="158" stroke="#C8C8C0" stroke-width="0.75"/>
+  <line x1="354" y1="158" x2="402" y2="158" stroke="#4A4A44" stroke-width="1.3"
+    stroke-opacity="0.9" stroke-dasharray="4 6" class="flow-int"/>
+  <polygon points="402,158 395,154.5 395,161.5" fill="#4A4A44" fill-opacity="0.9"/>
+  <!-- "feeds" pill -->
+  <rect x="358" y="147" width="40" height="13" rx="6.5"
+    fill="#FFFFFF" stroke="#C8C8C0" stroke-width="0.6"/>
+  <text x="378" y="153.5" text-anchor="middle" dominant-baseline="middle"
+    fill="#9A9A90" font-size="6.5" font-family="'DM Mono',monospace" letter-spacing="0.3">feeds</text>
+
+  <!-- Arrow: Dashboard → AI Agents -->
+  <line x1="603" y1="159" x2="614" y2="159" stroke="#C8C8C0" stroke-width="0.75"/>
+  <line x1="603" y1="159" x2="614" y2="159" stroke="#3DC98A" stroke-width="1.3"
+    stroke-opacity="0.9" stroke-dasharray="4 6" class="flow-int2"/>
+  <polygon points="614,159 607,155.5 607,162.5" fill="#3DC98A" fill-opacity="0.9"/>
+  <!-- "orchestrates" pill -->
+  <rect x="568" y="149" width="72" height="13" rx="6.5"
+    fill="#E8F9F1" stroke="#3DC98A" stroke-width="0.6"/>
+  <text x="604" y="155.5" text-anchor="middle" dominant-baseline="middle"
+    fill="#1A7A4A" font-size="6.5" font-family="'DM Mono',monospace" letter-spacing="0.3">orchestrates</text>
+
+  <!-- DT corner dots -->
+  <circle cx="46" cy="42" r="1.2" fill="#C8C8C0"/>
+  <circle cx="54" cy="42" r="1.2" fill="#C8C8C0"/>
+  <circle cx="62" cy="42" r="1.2" fill="#C8C8C0"/>
+  <circle cx="46" cy="50" r="1.2" fill="#C8C8C0"/>
+  <circle cx="54" cy="50" r="1.2" fill="#C8C8C0"/>
+  <circle cx="62" cy="50" r="1.2" fill="#C8C8C0"/>
+  <circle cx="854" cy="42" r="1.2" fill="#C8C8C0"/>
+  <circle cx="846" cy="42" r="1.2" fill="#C8C8C0"/>
+  <circle cx="838" cy="42" r="1.2" fill="#C8C8C0"/>
+  <circle cx="854" cy="50" r="1.2" fill="#C8C8C0"/>
+  <circle cx="846" cy="50" r="1.2" fill="#C8C8C0"/>
+  <circle cx="838" cy="50" r="1.2" fill="#C8C8C0"/>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- FANNED VERTICAL CONNECTOR (DM → DT)           -->
+  <!-- ══════════════════════════════════════════════ -->
+
+  <!-- Fan lines (bottom=DM top at y=348, top=DT bottom at y=266) -->
+  <path d="M 320 348 C 320 316, 418 298, 418 266" fill="none" stroke="#C8C8C0" stroke-width="0.8" stroke-opacity="0.5" stroke-dasharray="3 9" class="flow-v-0"/>
+  <path d="M 356 348 C 356 322, 428 300, 428 266" fill="none" stroke="#C8C8C0" stroke-width="0.8" stroke-opacity="0.5" stroke-dasharray="3 9" class="flow-v-1"/>
+  <path d="M 392 348 C 392 326, 438 302, 438 266" fill="none" stroke="#C8C8C0" stroke-width="0.9" stroke-opacity="0.55" stroke-dasharray="3 8" class="flow-v-2"/>
+  <path d="M 428 348 C 428 330, 446 308, 446 266" fill="none" stroke="#3DC98A" stroke-width="1.4" stroke-opacity="0.9" stroke-dasharray="6 7" class="flow-v-main"/>
+  <path d="M 450 348 C 450 330, 450 308, 450 266" fill="none" stroke="#3DC98A" stroke-width="1.5" stroke-opacity="0.95" stroke-dasharray="6 7" class="flow-v-main"/>
+  <path d="M 472 348 C 472 330, 454 308, 454 266" fill="none" stroke="#3DC98A" stroke-width="1.4" stroke-opacity="0.9" stroke-dasharray="6 7" class="flow-v-main"/>
+  <path d="M 508 348 C 508 326, 462 302, 462 266" fill="none" stroke="#C8C8C0" stroke-width="0.9" stroke-opacity="0.55" stroke-dasharray="3 8" class="flow-v-2"/>
+  <path d="M 544 348 C 544 322, 472 300, 472 266" fill="none" stroke="#C8C8C0" stroke-width="0.8" stroke-opacity="0.5" stroke-dasharray="3 9" class="flow-v-1"/>
+  <path d="M 580 348 C 580 316, 482 298, 482 266" fill="none" stroke="#C8C8C0" stroke-width="0.8" stroke-opacity="0.5" stroke-dasharray="3 9" class="flow-v-0"/>
+
+  <!-- Upward arrow tip -->
+  <polygon points="450,267 445,277 455,277" fill="#3DC98A"/>
+
+  <!-- Connector label pill -->
+  <rect x="394" y="296" width="112" height="24" rx="12"
+    fill="#FFFFFF" stroke="#C8C8C0" stroke-width="0.75"/>
+  <text x="450" y="309" text-anchor="middle" dominant-baseline="middle"
+    fill="#4A4A44" font-size="7" font-family="'DM Mono',monospace" letter-spacing="1.5">
+    DATA PIPELINE
+  </text>
+
+  <!-- Side annotation -->
+  <text x="48" y="308" dominant-baseline="middle"
+    fill="#9A9A90" font-size="7" font-family="'DM Mono',monospace" letter-spacing="0.8">
+    80% foundation → 20% intelligence
+  </text>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- DATA MANAGER (y=348, h=222)                   -->
+  <!-- ══════════════════════════════════════════════ -->
+  <rect x="32" y="348" width="836" height="222" rx="4"
+    fill="url(#dmGrad)" stroke="#1A1A18" stroke-width="0.7" stroke-opacity="0.35" stroke-dasharray="7 5"/>
+
+  <!-- Section label -->
+  <rect x="48" y="336" width="122" height="24" rx="12"
+    fill="#FFFFFF" stroke="#1A1A18" stroke-width="0.7" stroke-opacity="0.45"/>
+  <text x="109" y="349" text-anchor="middle" dominant-baseline="middle"
+    fill="#1A1A18" font-size="8.5" font-family="'DM Mono',monospace" font-weight="500" letter-spacing="2.5">
+    DATA MANAGER
+  </text>
+
+  <!-- 80% badge -->
+  <rect x="800" y="358" width="56" height="16" rx="8"
+    fill="#FFF8EC" stroke="#C8922A" stroke-width="0.7"/>
+  <text x="828" y="367" text-anchor="middle" dominant-baseline="middle"
+    fill="#8A5E10" font-size="7" font-family="'DM Mono',monospace" font-weight="500" letter-spacing="1">
+    80% LAYER
+  </text>
+
+  <!-- ─── Box 0: Legacy Data ─── -->
+  <g class="box-4">
+    <rect x="34" y="400" width="172" height="126" rx="3" fill="#1A1A18" fill-opacity="0.06"/>
+    <rect x="32" y="398" width="172" height="126" rx="3" fill="#FFFFFF" stroke="#C8C8C0" stroke-width="0.85"/>
+    <rect x="32" y="398" width="172" height="3.5" rx="1.5" fill="#9A9A90"/>
+    <rect x="42" y="411" width="52" height="15" rx="7.5" fill="#F0F0EC" stroke="#9A9A90" stroke-width="0.6"/>
+    <text x="68" y="419" text-anchor="middle" dominant-baseline="middle"
+      fill="#4A4A44" font-size="6.5" font-family="'DM Mono',monospace" letter-spacing="1">INPUT</text>
+    <line x1="44" y1="494" x2="192" y2="494" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.6"/>
+    <line x1="44" y1="504" x2="148" y2="504" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="118" y="453" text-anchor="middle" dominant-baseline="middle"
+      fill="#1A1A18" font-size="11" font-family="'DM Sans',sans-serif" font-weight="600">Legacy Data</text>
+    <text x="118" y="468" text-anchor="middle" dominant-baseline="middle"
+      fill="#9A9A90" font-size="7.5" font-family="'DM Mono',monospace">disparate sources</text>
+    <text x="118" y="536" text-anchor="middle"
+      fill="#9A9A90" font-size="6.5" font-family="'DM Mono',monospace" letter-spacing="0.4">noise reduction</text>
+  </g>
+
+  <!-- ─── Box 1: Data Injector ─── -->
+  <g class="box-5">
+    <rect x="222" y="400" width="172" height="126" rx="3" fill="#1A1A18" fill-opacity="0.06"/>
+    <rect x="220" y="398" width="172" height="126" rx="3" fill="#FFFFFF" stroke="#C8C8C0" stroke-width="0.85"/>
+    <rect x="220" y="398" width="172" height="3.5" rx="1.5" fill="#4A4A44"/>
+    <line x1="232" y1="494" x2="380" y2="494" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.6"/>
+    <line x1="232" y1="504" x2="328" y2="504" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="306" y="453" text-anchor="middle" dominant-baseline="middle"
+      fill="#1A1A18" font-size="11" font-family="'DM Sans',sans-serif" font-weight="600">Data Injector</text>
+    <text x="306" y="468" text-anchor="middle" dominant-baseline="middle"
+      fill="#9A9A90" font-size="7.5" font-family="'DM Mono',monospace">ichorai proprietary</text>
+    <text x="306" y="536" text-anchor="middle"
+      fill="#9A9A90" font-size="6.5" font-family="'DM Mono',monospace" letter-spacing="0.4">schema mapping</text>
+  </g>
+
+  <!-- ─── Box 2: Data Lake ─── -->
+  <g class="box-6">
+    <rect x="410" y="400" width="172" height="126" rx="3" fill="#1A1A18" fill-opacity="0.06"/>
+    <rect x="408" y="398" width="172" height="126" rx="3" fill="#FFFFFF" stroke="#C8C8C0" stroke-width="0.85"/>
+    <rect x="408" y="398" width="172" height="3.5" rx="1.5" fill="#4A4A44"/>
+    <line x1="420" y1="494" x2="568" y2="494" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.6"/>
+    <line x1="420" y1="504" x2="516" y2="504" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="494" y="453" text-anchor="middle" dominant-baseline="middle"
+      fill="#1A1A18" font-size="11" font-family="'DM Sans',sans-serif" font-weight="600">Data Lake</text>
+    <text x="494" y="468" text-anchor="middle" dominant-baseline="middle"
+      fill="#9A9A90" font-size="7.5" font-family="'DM Mono',monospace">unified substrate</text>
+    <text x="494" y="536" text-anchor="middle"
+      fill="#9A9A90" font-size="6.5" font-family="'DM Mono',monospace" letter-spacing="0.4">normalisation</text>
+  </g>
+
+  <!-- ─── Box 3: Ichorai Architecture ─── -->
+  <g class="box-7">
+    <rect x="598" y="400" width="234" height="126" rx="3" fill="#1A1A18" fill-opacity="0.06"/>
+    <rect x="596" y="398" width="234" height="126" rx="3" fill="#FFFFFF" stroke="#C8C8C0" stroke-width="0.85"/>
+    <rect x="596" y="398" width="234" height="3.5" rx="1.5" fill="#3DC98A"/>
+    <rect x="792" y="411" width="30" height="15" rx="7.5" fill="#E8F9F1" stroke="#3DC98A" stroke-width="0.6"/>
+    <text x="807" y="419" text-anchor="middle" dominant-baseline="middle"
+      fill="#1A7A4A" font-size="6.5" font-family="'DM Mono',monospace" letter-spacing="1">OUT</text>
+    <line x1="608" y1="494" x2="818" y2="494" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.6"/>
+    <line x1="608" y1="504" x2="740" y2="504" stroke="#C8C8C0" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="713" y="453" text-anchor="middle" dominant-baseline="middle"
+      fill="#1A1A18" font-size="11" font-family="'DM Sans',sans-serif" font-weight="600">Ichorai Architecture</text>
+    <text x="713" y="468" text-anchor="middle" dominant-baseline="middle"
+      fill="#9A9A90" font-size="7.5" font-family="'DM Mono',monospace">normalised domain schemas</text>
+    <text x="713" y="536" text-anchor="middle"
+      fill="#9A9A90" font-size="6.5" font-family="'DM Mono',monospace" letter-spacing="0.4">domain ontology</text>
+  </g>
+
+  <!-- ─── Flow arrows between DM boxes ─── -->
+  <!-- 0→1 -->
+  <line x1="204" y1="461" x2="220" y2="461" stroke="#C8C8C0" stroke-width="1"/>
+  <line x1="204" y1="461" x2="220" y2="461" stroke="#4A4A44" stroke-width="1.4" stroke-opacity="0.9" stroke-dasharray="5 7" class="flow-h-0"/>
+  <polygon points="220,461 213,457.5 213,464.5" fill="#4A4A44" fill-opacity="0.9"/>
+  <!-- 1→2 -->
+  <line x1="392" y1="461" x2="408" y2="461" stroke="#C8C8C0" stroke-width="1"/>
+  <line x1="392" y1="461" x2="408" y2="461" stroke="#4A4A44" stroke-width="1.4" stroke-opacity="0.9" stroke-dasharray="5 7" class="flow-h-1"/>
+  <polygon points="408,461 401,457.5 401,464.5" fill="#4A4A44" fill-opacity="0.9"/>
+  <!-- 2→3 -->
+  <line x1="580" y1="461" x2="596" y2="461" stroke="#C8C8C0" stroke-width="1"/>
+  <line x1="580" y1="461" x2="596" y2="461" stroke="#3DC98A" stroke-width="1.4" stroke-opacity="0.9" stroke-dasharray="5 7" class="flow-h-2"/>
+  <polygon points="596,461 589,457.5 589,464.5" fill="#3DC98A" fill-opacity="0.9"/>
+
+  <!-- DM corner dots -->
+  <circle cx="46" cy="543" r="1.2" fill="#C8C8C0"/>
+  <circle cx="54" cy="543" r="1.2" fill="#C8C8C0"/>
+  <circle cx="62" cy="543" r="1.2" fill="#C8C8C0"/>
+  <circle cx="46" cy="551" r="1.2" fill="#C8C8C0"/>
+  <circle cx="54" cy="551" r="1.2" fill="#C8C8C0"/>
+  <circle cx="62" cy="551" r="1.2" fill="#C8C8C0"/>
+  <circle cx="854" cy="543" r="1.2" fill="#C8C8C0"/>
+  <circle cx="846" cy="543" r="1.2" fill="#C8C8C0"/>
+  <circle cx="838" cy="543" r="1.2" fill="#C8C8C0"/>
+  <circle cx="854" cy="551" r="1.2" fill="#C8C8C0"/>
+  <circle cx="846" cy="551" r="1.2" fill="#C8C8C0"/>
+  <circle cx="838" cy="551" r="1.2" fill="#C8C8C0"/>
+
+  <!-- Footer -->
+  <text x="868" y="609" text-anchor="end"
+    fill="#9A9A90" font-size="6.5" font-family="'DM Mono',monospace" letter-spacing="0.8">
+    ICHORAI · INDUSTRIAL AI PAAS · CONFIDENTIAL
+  </text>
+  <text x="32" y="609"
+    fill="#9A9A90" font-size="6.5" font-family="'DM Mono',monospace" letter-spacing="0.8">
+    REV 2.1 · TRL-3
+  </text>
+</svg>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-line" style="background:#3DC98A;"></div>
+    <span class="legend-label">Digital Twin — 20% Intelligence Layer</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-line" style="background:#C8922A;"></div>
+    <span class="legend-label">Data Manager — 80% Foundation Layer</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-line" style="background:#4A4A44;"></div>
+    <span class="legend-label">Ichorai Core Engine</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-line" style="background:#7ABFA0;"></div>
+    <span class="legend-label">AI Agent Orchestration</span>
+  </div>
+</div>
+
+<script>
+function exportPNG() {
+  const svg = document.getElementById('diagram');
+  const SCALE = 4;
+  const W = 900, H = 620;
+  const clone = svg.cloneNode(true);
+  // Remove scan elements if any
+  const xml = new XMLSerializer().serializeToString(clone);
+  const blob = new Blob([xml], { type: 'image/svg+xml;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const canvas = document.createElement('canvas');
+  canvas.width  = W * SCALE;
+  canvas.height = H * SCALE;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(SCALE, SCALE);
+  const img = new Image();
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, W, H);
+    URL.revokeObjectURL(url);
+    const a = document.createElement('a');
+    a.download = 'ichorai-architecture-4x.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  };
+  img.onerror = () => {
+    const a = document.createElement('a');
+    a.download = 'ichorai-architecture.svg';
+    a.href = url;
+    a.click();
+  };
+  img.src = url;
+}
+</script>
+</body>
+</html>
